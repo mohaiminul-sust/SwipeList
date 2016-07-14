@@ -16,6 +16,7 @@
 		C40009551D377A7B00095EC4 /* SwipeListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40009541D377A7B00095EC4 /* SwipeListUITests.swift */; };
 		C40009631D377DFC00095EC4 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40009621D377DFC00095EC4 /* ToDoItem.swift */; };
 		C40009651D37845B00095EC4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40009641D37845B00095EC4 /* TableViewCell.swift */; };
+		C46B652A1D3792FC003080DF /* StrikeThroughText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46B65291D3792FC003080DF /* StrikeThroughText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		C40009561D377A7B00095EC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C40009621D377DFC00095EC4 /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		C40009641D37845B00095EC4 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		C46B65291D3792FC003080DF /* StrikeThroughText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrikeThroughText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				C40009361D377A7B00095EC4 /* ViewController.swift */,
 				C40009621D377DFC00095EC4 /* ToDoItem.swift */,
 				C40009641D37845B00095EC4 /* TableViewCell.swift */,
+				C46B65291D3792FC003080DF /* StrikeThroughText.swift */,
 				C40009381D377A7B00095EC4 /* Main.storyboard */,
 				C400093B1D377A7B00095EC4 /* Assets.xcassets */,
 				C400093D1D377A7B00095EC4 /* LaunchScreen.storyboard */,
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C46B652A1D3792FC003080DF /* StrikeThroughText.swift in Sources */,
 				C40009371D377A7B00095EC4 /* ViewController.swift in Sources */,
 				C40009651D37845B00095EC4 /* TableViewCell.swift in Sources */,
 				C40009351D377A7B00095EC4 /* AppDelegate.swift in Sources */,
@@ -492,6 +496,7 @@
 				C400095B1D377A7B00095EC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C400095C1D377A7B00095EC4 /* Build configuration list for PBXNativeTarget "SwipeListTests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +505,7 @@
 				C400095E1D377A7B00095EC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C400095F1D377A7B00095EC4 /* Build configuration list for PBXNativeTarget "SwipeListUITests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +514,7 @@
 				C40009611D377A7B00095EC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

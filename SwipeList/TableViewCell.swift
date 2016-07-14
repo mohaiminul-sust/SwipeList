@@ -17,16 +17,38 @@ class TableViewCell: UITableViewCell {
     
     let gradientLayer = CAGradientLayer()
     var originalCenter = CGPoint()
-    var deleteOnDragRelease = false
+    var deleteOnDragRelease = false, completeOnDragRelease = false
+    let label: StrikeThroughText
+    var itemCompleteLayer = CALayer()
     var delegate: TableViewCellDelegate?
     var todoitem: ToDoItem?
+    let kLabelLeftMargin: CGFloat = 15.0
+    
+    //to do item observer
+    var item: ToDoItem? {
+        didSet {
+            label.text = item!.text
+            label.strikeThrough = item!.completed
+            itemCompleteLayer.hidden = !label.strikeThrough
+        }
+    }
     
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        //custom label implementation
+        label = StrikeThroughText(frame: CGRect.null)
+        label.textColor = UIColor.whiteColor()
+        label.font = UIFont.boldSystemFontOfSize(16)
+        label.backgroundColor = UIColor.clearColor()
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        //adding custom label
+        addSubview(label)
+        selectionStyle = .None
         
         // gradient layer
         gradientLayer.frame = bounds
@@ -38,6 +60,12 @@ class TableViewCell: UITableViewCell {
         gradientLayer.locations = [0.0, 0.01, 0.95, 1.0]
         layer.insertSublayer(gradientLayer, atIndex: 0)
         
+        // green colored completion layer
+        itemCompleteLayer = CALayer(layer: layer)
+        itemCompleteLayer.backgroundColor = UIColor(red: 0.0, green: 0.6, blue: 0.0, alpha: 1.0).CGColor
+        itemCompleteLayer.hidden = true
+        layer.insertSublayer(itemCompleteLayer, atIndex: 0)
+        
         // pan recognizer
         let recognizer = UIPanGestureRecognizer(target: self, action: #selector(TableViewCell.handlePan(_:)))
         recognizer.delegate = self
@@ -47,6 +75,8 @@ class TableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds
+        itemCompleteLayer.frame = bounds
+        label.frame = CGRect(x: kLabelLeftMargin, y: 0, width: bounds.size.width - kLabelLeftMargin, height: bounds.size.height)
     }
     
     //MARK: - horizontal pan gesture methods
@@ -58,18 +88,25 @@ class TableViewCell: UITableViewCell {
             let translation = recognizer.translationInView(self)
             center = CGPointMake(originalCenter.x + translation.x, originalCenter.y)
             deleteOnDragRelease = frame.origin.x < -frame.size.width / 2.0
+            completeOnDragRelease = frame.origin.x > frame.size.width / 2.0
         }
         if recognizer.state == .Ended {
             let originalFrame = CGRect(x: 0, y: frame.origin.y,
                                        width: bounds.size.width, height: bounds.size.height)
-            if !deleteOnDragRelease {
-                UIView.animateWithDuration(0.2, animations: {self.frame = originalFrame})
-            }
             if deleteOnDragRelease {
                 if delegate != nil && todoitem != nil {
-                    //notify delegate to delete item
+                    // notify the delegate that this item should be deleted
                     delegate!.itemDeleted(todoitem!)
                 }
+            } else if completeOnDragRelease {
+                if todoitem != nil {
+                    todoitem!.completed = true
+                }
+                label.strikeThrough = true
+                itemCompleteLayer.hidden = false
+                UIView.animateWithDuration(0.2, animations: {self.frame = originalFrame})
+            } else {
+                UIView.animateWithDuration(0.2, animations: {self.frame = originalFrame})
             }
         }
     }
