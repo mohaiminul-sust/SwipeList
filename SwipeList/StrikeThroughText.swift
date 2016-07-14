@@ -11,8 +11,7 @@ import QuartzCore
 
 class StrikeThroughText: UILabel {
     let strikeThroughLayer: CALayer
-    let kStrikeOutThickness: CGFloat = 2.0
-    
+
     var strikeThrough : Bool {
         didSet {
             strikeThroughLayer.hidden = !strikeThrough
@@ -41,9 +40,13 @@ class StrikeThroughText: UILabel {
         resizeStrikeThrough()
     }
     
+    let kStrikeOutThickness: CGFloat = 2.0
+    
     func resizeStrikeThrough() {
-        let textSize = text!.sizeWithAttributes([NSFontAttributeName:font])
-        strikeThroughLayer.frame = CGRect(x: 0, y: bounds.size.height/2,
-                                          width: textSize.width, height: kStrikeOutThickness)
+        if let text = text {
+            let textSize = text.sizeWithAttributes([NSFontAttributeName:font])
+            strikeThroughLayer.frame = CGRect(x: 0, y: bounds.size.height/2,
+                                              width: textSize.width, height: kStrikeOutThickness)
+        }
     }
 }
