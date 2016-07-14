@@ -1,3 +1,3 @@
-iOS gesture based list UI
+# iOS gesture based list UI
 
-# Used **gradient filter** to create eyecandy list and gestures to complete list actions :)
+Used **gradient filter** to create eyecandy list and implemented **gesture recognizers** to complete list actions :)
